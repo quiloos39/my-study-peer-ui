@@ -1,23 +1,23 @@
 import React from "react";
-import { Helmet } from "react-helmet";
 import imageStudents from "../images/priscilla-du-preez-XkKCui44iM0-unsplash.jpg";
 import Layout from "../components/layout";
+import PropTypes from "prop-types";
 
-const buttonStyle = {
-  maxWidth: "200px",
-  width: "100%",
-};
-
-const Menu = ({ gradient, backgroundColor, children, ...props }) => {
+const Menu = ({ gradient, children, ...props }) => {
   return (
     <div
       className="text-white p-4 mb-4"
-      style={{ backgroundColor: backgroundColor, background: gradient }}
+      style={{ background: gradient }}
       {...props}
     >
       {children}
     </div>
   );
+};
+
+Menu.propTypes = {
+  gradient: PropTypes.string,
+  children: PropTypes.arrayOf(PropTypes.object),
 };
 
 const IndexPage = () => {
@@ -26,20 +26,14 @@ const IndexPage = () => {
       <div className="container bg-white p-4 flex-grow-1 my-2 h-100">
         <div className="row h-100">
           <div className="col-lg-9">
-            <Menu
-              gradient="linear-gradient(90deg, rgba(32,80,154,1) 0%, rgba(55,112,172,1) 100%)"
-              backgroundColor="#224169FF"
-            >
+            <Menu gradient="linear-gradient(90deg, rgba(32,80,154,1) 0%, rgba(55,112,172,1) 100%)">
               <div className="mb-3">
                 <h2 className="fw-bold">Looking for a study partner ?</h2>
                 <p>Maybe just someone to help you with your course ?</p>
               </div>
               <button className="btn btn-success">Register today</button>
             </Menu>
-            <Menu
-              gradient="linear-gradient(90deg, rgba(32,80,154,1) 0%, rgba(55,112,172,1) 100%)"
-              backgroundColor="#393b55"
-            >
+            <Menu gradient="linear-gradient(90deg, rgba(32,80,154,1) 0%, rgba(55,112,172,1) 100%)">
               <div className="mb-3">
                 <h2 className="fw-bold">Already have account ?</h2>
                 <p>What are you waiting for login already</p>

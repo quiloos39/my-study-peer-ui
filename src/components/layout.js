@@ -1,5 +1,6 @@
 import React from "react";
 import Navbar from "./navbar";
+import PropTypes from "prop-types";
 
 const Layout = ({ children, ...props }) => {
   return (
@@ -8,6 +9,10 @@ const Layout = ({ children, ...props }) => {
       {children}
     </div>
   );
+};
+
+Layout.propTypes = {
+  children: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default Layout;
