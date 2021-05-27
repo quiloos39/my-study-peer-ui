@@ -15,11 +15,9 @@ const ContactPage = () => {
           <div className="col-lg-9">
             <div>
               <h2>Contact Us</h2>
+              <hr />
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Eligendi expedita inventore itaque labore, nemo nesciunt
-                obcaecati repudiandae. Delectus distinctio dolorum earum, et
-                facilis iure laudantium molestiae molestias nihil, odit quae.
+                You can contact us from <b>support@mystudypeer.com</b>.
               </p>
             </div>
           </div>
