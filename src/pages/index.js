@@ -49,14 +49,14 @@ const IndexPage = () => {
     {
       id: 1,
       title: "Brand new ui",
-      desc: "",
+      desc: "Test",
     },
   ];
 
   return (
-    <Layout className="vh-100 d-flex flex-column">
-      <div className="container bg-white p-4 flex-grow-1 my-2 h-100">
-        <div className="row h-100">
+    <Layout>
+      <div className="container bg-white my-4 h-100">
+        <div className="row">
           <div className="col-lg-9">
             <Menu gradient="linear-gradient(90deg, rgba(32,80,154,1) 0%, rgba(55,112,172,1) 100%)">
               <div className="mb-3">
@@ -76,28 +76,28 @@ const IndexPage = () => {
                 Login
               </Link>
             </Menu>
-            <div>
-              <h2>News</h2>
-              <hr />
-              <div className="row">
-                {announcements.map((announcement) => (
-                  <Announcement
-                    key={announcement.id}
-                    title={announcement.title}
-                    desc={announcement.desc}
-                  />
-                ))}
-              </div>
-            </div>
           </div>
           <div
-            id="homepage-header"
             className="col-lg-3 order-first order-lg-last mb-4"
+            style={{ height: "600px" }}
           >
             <img
               src={imageStudents}
               style={{ width: "100%", height: "100%", objectFit: "cover" }}
             />
+          </div>
+        </div>
+        <div>
+          <h2>News</h2>
+          <hr />
+          <div className="row">
+            {announcements.map((announcement) => (
+              <Announcement
+                key={announcement.id}
+                title={announcement.title}
+                desc={announcement.desc}
+              />
+            ))}
           </div>
         </div>
       </div>

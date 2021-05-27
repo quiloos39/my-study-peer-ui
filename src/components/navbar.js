@@ -2,45 +2,41 @@ import React from "react";
 import { Link } from "gatsby";
 
 const Navbar = () => {
+  let menuItems = [
+    { name: "Home", path: "/" },
+    { name: "About", path: "/about" },
+    { name: "Posts", path: "/posts" },
+    { name: "Contact", path: "/contact" },
+    { name: "Login", path: "/login" },
+  ];
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container">
-        <a className="navbar-brand" href="#" style={{ fontSize: "1.5em" }}>
+        <Link className="navbar-brand" to="/" style={{ fontSize: "1.5em" }}>
           My study peer
-        </a>
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
+          data-bs-target="#menu"
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
+        <div className="collapse navbar-collapse" id="menu">
           <ul className="navbar-nav ms-auto">
-            <li className="nav-item">
-              <Link className="nav-link active" aria-current="page" to="/">
-                Home
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" aria-current="page" to="/about">
-                About
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" aria-current="page" to="/posts">
-                Posts
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" aria-current="page" to="/contact">
-                Contact
-              </Link>
-            </li>
+            {menuItems.map((item) => (
+              <li key={item.name} className="nav-item">
+                <Link
+                  className={`nav-link ${
+                    window.location.pathname === item.path ? "active" : ""
+                  }`}
+                  to={item.path}
+                >
+                  {item.name}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
       </div>
