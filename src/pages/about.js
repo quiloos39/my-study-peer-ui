@@ -1,6 +1,5 @@
 import React from "react";
 import Layout from "../components/layout";
-import { Link } from "gatsby";
 
 import headerImage from "../images/alex-kulikov-BrunIOLQMfQ-unsplash.jpg";
 import avatar1 from "../images/10371011.png";
@@ -34,7 +33,7 @@ const AboutPage = () => {
                   style={{ width: "150px", height: "150px" }}
                 />
               </div>
-              <Link to="https://github.com/quiloos39">@quiloos39</Link>
+              <a href="https://github.com/quiloos39">@quiloos39</a>
             </div>
             <div className="me-3">
               <div>
@@ -43,7 +42,7 @@ const AboutPage = () => {
                   style={{ width: "150px", height: "150px" }}
                 />
               </div>
-              <Link to="https://github.com/Dexess">@dexess</Link>
+              <a href="https://github.com/Dexess">@dexess</a>
             </div>
           </div>
         </div>

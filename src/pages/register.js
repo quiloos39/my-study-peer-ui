@@ -40,7 +40,7 @@ const RegisterPage = () => {
 
           <div className="mb-3">
             <label>Telephone Number:</label>
-            <input type="email" className="form-control" id="email" />
+            <input type="email" className="form-control" id="telno" />
           </div>
           <div className="mb-3">
             <label>Email:</label>
