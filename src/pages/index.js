@@ -63,7 +63,7 @@ const IndexPage = () => {
                 <h2 className="fw-bold">Looking for a study partner ?</h2>
                 <p>Maybe just someone to help you with your course ?</p>
               </div>
-              <Link className="btn btn-success" to="#">
+              <Link className="btn btn-success" to="/register">
                 Register today
               </Link>
             </Menu>
@@ -72,7 +72,7 @@ const IndexPage = () => {
                 <h2 className="fw-bold">Already have account ?</h2>
                 <p>What are you waiting for login already</p>
               </div>
-              <Link className="btn btn-success" to="#">
+              <Link className="btn btn-success" to="/login">
                 Login
               </Link>
             </Menu>
