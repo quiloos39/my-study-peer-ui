@@ -1,7 +1,9 @@
 import React from "react";
-import imageStudents from "../images/priscilla-du-preez-XkKCui44iM0-unsplash.jpg";
 import Layout from "../components/layout";
 import PropTypes from "prop-types";
+import { Link } from "gatsby";
+
+import imageStudents from "../images/priscilla-du-preez-XkKCui44iM0-unsplash.jpg";
 
 const Menu = ({ gradient, children, ...props }) => {
   return (
@@ -20,7 +22,37 @@ Menu.propTypes = {
   children: PropTypes.arrayOf(PropTypes.object),
 };
 
+const Announcement = ({ title, desc, ...props }) => {
+  return (
+    <div {...props}>
+      <div
+        style={{
+          maxHeight: "500px",
+          width: "100%",
+          height: "150px",
+          backgroundColor: "#1f2f71",
+        }}
+      ></div>
+      <h4>{title}</h4>
+      <p>{desc}</p>
+    </div>
+  );
+};
+
+Announcement.propTypes = {
+  title: PropTypes.string,
+  desc: PropTypes.string,
+};
+
 const IndexPage = () => {
+  let announcements = [
+    {
+      id: 1,
+      title: "Brand new ui",
+      desc: "",
+    },
+  ];
+
   return (
     <Layout className="vh-100 d-flex flex-column">
       <div className="container bg-white p-4 flex-grow-1 my-2 h-100">
@@ -31,67 +63,30 @@ const IndexPage = () => {
                 <h2 className="fw-bold">Looking for a study partner ?</h2>
                 <p>Maybe just someone to help you with your course ?</p>
               </div>
-              <button className="btn btn-success">Register today</button>
+              <Link className="btn btn-success" to="#">
+                Register today
+              </Link>
             </Menu>
             <Menu gradient="linear-gradient(90deg, rgba(32,80,154,1) 0%, rgba(55,112,172,1) 100%)">
               <div className="mb-3">
                 <h2 className="fw-bold">Already have account ?</h2>
                 <p>What are you waiting for login already</p>
               </div>
-              <button className="btn btn-success">Login</button>
+              <Link className="btn btn-success" to="#">
+                Login
+              </Link>
             </Menu>
             <div>
               <h2>News</h2>
               <hr />
               <div className="row">
-                <div className="col-lg-3">
-                  <div
-                    style={{
-                      maxHeight: "500px",
-                      width: "100%",
-                      height: "150px",
-                      backgroundColor: "#1f2f71",
-                    }}
-                  ></div>
-                  <h4>Brand new ui</h4>
-                  <p>asdasdasd</p>
-                </div>
-                <div className="col-lg-3">
-                  <div
-                    style={{
-                      maxHeight: "500px",
-                      width: "100%",
-                      height: "150px",
-                      backgroundColor: "#182a79",
-                    }}
-                  ></div>
-                  <h4>Biggest update ever</h4>
-                  <p>asdasdasd</p>
-                </div>
-                <div className="col-lg-3">
-                  <div
-                    style={{
-                      maxHeight: "500px",
-                      width: "100%",
-                      height: "150px",
-                      backgroundColor: "#112984",
-                    }}
-                  ></div>
-                  <h4>Hello normies</h4>
-                  <p>asdasdasd</p>
-                </div>
-                <div className="col-lg-3">
-                  <div
-                    style={{
-                      maxHeight: "500px",
-                      width: "100%",
-                      height: "150px",
-                      backgroundColor: "#062180",
-                    }}
-                  ></div>
-                  <h4>I love yeliz hoca</h4>
-                  <p>asdasdasd</p>
-                </div>
+                {announcements.map((announcement) => (
+                  <Announcement
+                    key={announcement.id}
+                    title={announcement.title}
+                    desc={announcement.desc}
+                  />
+                ))}
               </div>
             </div>
           </div>

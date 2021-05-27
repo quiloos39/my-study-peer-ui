@@ -2,7 +2,7 @@ import React from "react";
 import Layout from "../components/layout";
 import PropTypes from "prop-types";
 
-const Card = ({ title, author, desc }) => {
+const Post = ({ title, author, desc }) => {
   return (
     <div className="card mb-3">
       <div className="card-body">
@@ -14,21 +14,33 @@ const Card = ({ title, author, desc }) => {
   );
 };
 
-Card.propTypes = {
+Post.propTypes = {
   title: PropTypes.string,
   author: PropTypes.string,
   desc: PropTypes.string,
 };
 
 const PostsPage = () => {
+  let posts = [
+    {
+      id: 1,
+      title: "Looking for CNG 351 partner",
+      author: "Necdet Efe",
+      desc: "I am looking for partner that will motivate me.",
+    },
+  ];
   return (
     <Layout>
       <div className="container my-5">
         <div>
-          <Card text="asd" title="asd" />
-          <Card text="asd" title="asd" />
-          <Card text="asd" title="asd" />
-          <Card text="asd" title="asd" />
+          {posts.map((post) => (
+            <Post
+              key={post.id}
+              title={post.title}
+              author={post.author}
+              desc={post.desc}
+            />
+          ))}
         </div>
         <nav aria-label="Page navigation example">
           <ul className="pagination">
