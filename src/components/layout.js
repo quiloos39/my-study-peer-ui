@@ -12,7 +12,7 @@ const Layout = ({ children, ...props }) => {
 };
 
 Layout.propTypes = {
-  children: PropTypes.arrayOf(PropTypes.object),
+  children: PropTypes.node,
 };
 
 export default Layout;

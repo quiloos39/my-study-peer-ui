@@ -4,7 +4,7 @@ import { Link } from "gatsby";
 
 const LoginPage = () => {
   return (
-    <Layout className="vh-100" style={{ backgroundColor: "#0f3a65" }}>
+    <Layout className="min-vh-100" style={{ backgroundColor: "#0f3a65" }}>
       <div className="container my-5 text-white">
         <div className="row">
           <div className="col-lg-8 offset-lg-2">
