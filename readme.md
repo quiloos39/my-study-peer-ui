@@ -13,3 +13,12 @@ You need to have [Node.js](https://nodejs.org/en/) installed.
 ## How to run
 
 `npm run develop`
+
+## Some images
+
+### Home page
+![]("./images/homepage.png")
+
+### Contact page
+
+![]("./images/contact.png")
