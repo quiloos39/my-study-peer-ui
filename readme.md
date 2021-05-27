@@ -17,8 +17,8 @@ You need to have [Node.js](https://nodejs.org/en/) installed.
 ## Some images
 
 ### Home page
-![]("./images/homepage.png")
+![](images/homepage.png)
 
 ### Contact page
 
-![]("./images/contact.png")
+![](images/contact.png)
