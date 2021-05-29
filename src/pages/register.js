@@ -1,10 +1,12 @@
 import React from "react";
 import Layout from "../components/layout";
 import { Link } from "gatsby";
+import Navbar from "../components/navbar";
 
 const RegisterPage = () => {
   return (
     <Layout>
+      <Navbar />
       <div className="container my-5">
         <h2>Registration</h2>
         <hr />

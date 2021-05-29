@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "gatsby";
 
+const isBrowser = typeof window !== "undefined";
+
 const Navbar = () => {
   let menuItems = [
     { name: "Home", path: "/" },
@@ -29,7 +31,9 @@ const Navbar = () => {
               <li key={item.name} className="nav-item">
                 <Link
                   className={`nav-link ${
-                    window.location.pathname === item.path ? "active" : ""
+                    isBrowser && window.location.pathname === item.path
+                      ? "active"
+                      : ""
                   }`}
                   to={item.path}
                 >

@@ -4,10 +4,12 @@ import Layout from "../components/layout";
 import headerImage from "../images/alex-kulikov-BrunIOLQMfQ-unsplash.jpg";
 import avatar1 from "../images/10371011.png";
 import avatar2 from "../images/75804467.png";
+import Navbar from "../components/navbar";
 
 const AboutPage = () => {
   return (
     <Layout>
+      <Navbar />
       <img
         src={headerImage}
         style={{ width: "100%", height: "300px", objectFit: "cover" }}

@@ -1,10 +1,12 @@
 import React from "react";
 import Layout from "../components/layout";
 import { Link } from "gatsby";
+import Navbar from "../components/navbar";
 
 const LoginPage = () => {
   return (
-    <Layout className="min-vh-100" style={{ backgroundColor: "#0f3a65" }}>
+    <Layout className="vh-100" style={{ backgroundColor: "#0f3a65" }}>
+      <Navbar />
       <div className="container my-5 text-white">
         <div className="row">
           <div className="col-lg-8 offset-lg-2">

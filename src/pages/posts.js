@@ -1,45 +1,15 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "gatsby";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 import Layout from "../components/layout";
+import Navbar from "../components/navbar";
 
-let posts = [
-  {
-    id: 1,
-    title: "Looking for CNG 352 partner",
-    author: {
-      id: 1,
-      name: "Mustafa",
-      surname: "Aygun",
-    },
-    desc: "I am looking for partner that will motivate me.",
-    teamMembers: [
-      {
-        id: 1,
-        name: "Mustafa",
-        surname: "Aygun",
-        university: "METU",
-        year: "3",
-      },
-      {
-        id: 2,
-        name: "Necdet",
-        surname: "Efe",
-        university: "METU",
-        year: "3",
-      },
-    ],
-    comments: [
-      {
-        name: "Necdet",
-        surname: "Efe",
-        comment: "Amazing team mate had fun working with him.",
-        rating: 4,
-      },
-    ],
-  },
-];
+const authorStyle = {
+  textDecoration: "none",
+};
 
 const PostEntry = ({ post, setSelectedPost, ...props }) => {
   return (
@@ -107,10 +77,19 @@ const Navigator = () => {
 
 const Comment = ({ comment, ...props }) => {
   return (
-    <div className="border mb-3 p-3">
-      <h5>{`${comment.name} ${comment.surname}`}</h5>
+    <div className="p-3">
+      <Link
+        className="h5"
+        style={authorStyle}
+        to={`/users?id=${comment.id}`}
+      >{`${comment.name} ${comment.surname}`}</Link>
       <hr />
       <p>{comment.comment}</p>
+      <div>
+        {[...Array(Math.ceil(comment.rating))].map((_, index) => (
+          <FontAwesomeIcon key={index} icon={faStar} />
+        ))}
+      </div>
     </div>
   );
 };
@@ -122,7 +101,7 @@ Comment.propTypes = {
 const TeamBoard = ({ teamMembers, ...props }) => {
   return (
     <div className="table-responsive">
-      <table className="table table-striped table-bordered">
+      <table className="table table-striped table-bordered border-dark">
         <thead>
           <tr>
             <td>Full name</td>
@@ -136,7 +115,7 @@ const TeamBoard = ({ teamMembers, ...props }) => {
               <td>
                 <Link
                   to={`/users?id=${member.id}`}
-                  style={{ textDecoration: "none" }}
+                  style={authorStyle}
                 >{`${member.name} ${member.surname}`}</Link>
               </td>
               <td>{member.university}</td>
@@ -155,14 +134,15 @@ TeamBoard.propTypes = {
 
 const Post = ({ post, setSelectedPost, ...props }) => {
   return (
-    <div className="border p-4" {...props}>
+    <div className="border border-dark p-4" {...props}>
       <div className="row">
         <div className="col-lg-7">
           <div className="mb-3">
             <h2>{post.title}</h2>
             <Link
               to={`/users?id=${post.author.id}`}
-              style={{ textDecoration: "none" }}
+              className="h2"
+              style={authorStyle}
             >{`${post.author.name} ${post.author.surname}`}</Link>
             <hr />
             <p>{post.desc}</p>
@@ -170,13 +150,17 @@ const Post = ({ post, setSelectedPost, ...props }) => {
           <div className="mb-3">
             <h3>Comments</h3>
             <hr />
-            {post.comments.map((comment, index) => (
-              <Comment key={index} comment={comment} />
+            {post.comments.map((comment) => (
+              <Comment key={comment.id} comment={comment} />
             ))}
           </div>
 
           <div className="mb-3">
-            <button className="btn btn-success me-2" style={{ width: "120px" }}>
+            <button
+              className="btn btn-success me-2"
+              disabled={true}
+              style={{ width: "120px" }}
+            >
               Join
             </button>
             <button
@@ -204,7 +188,7 @@ Post.propTypes = {
   props: PropTypes.node,
 };
 
-const Posts = ({ setSelectedPost, ...props }) => {
+const Posts = ({ posts, setSelectedPost, ...props }) => {
   return (
     <div>
       <div>
@@ -223,20 +207,68 @@ const Posts = ({ setSelectedPost, ...props }) => {
 
 Posts.propTypes = {
   setSelectedPost: PropTypes.func,
+  posts: PropTypes.arrayOf(PropTypes.object),
   props: PropTypes.node,
 };
 
 const PostsPage = () => {
   let [selectedPost, setSelectedPost] = useState(null);
 
+  const posts = [
+    {
+      id: 1,
+      title: "Looking for CNG 352 partner",
+      author: {
+        id: 1,
+        name: "Mustafa",
+        surname: "Aygun",
+      },
+      desc: "I am looking for partner that will motivate me.",
+      teamMembers: [
+        {
+          id: 1,
+          name: "Mustafa",
+          surname: "Aygun",
+          university: "METU",
+          year: "3",
+        },
+        {
+          id: 2,
+          name: "Necdet",
+          surname: "Efe",
+          university: "METU",
+          year: "3",
+        },
+      ],
+      comments: [
+        {
+          id: 1,
+          name: "Necdet",
+          surname: "Efe",
+          comment: "Amazing team mate had fun working with him.",
+          rating: 4,
+        },
+        {
+          id: 2,
+          name: "Askar",
+          surname: "Bozcan",
+          comment: "Hello guys",
+          rating: 3,
+        },
+      ],
+    },
+  ];
+
   let view;
+
   if (selectedPost == null) {
-    view = <Posts setSelectedPost={setSelectedPost} />;
+    view = <Posts posts={posts} setSelectedPost={setSelectedPost} />;
   } else {
     view = <Post post={selectedPost} setSelectedPost={setSelectedPost} />;
   }
   return (
     <Layout>
+      <Navbar />
       <div className="container my-5">{view}</div>
     </Layout>
   );

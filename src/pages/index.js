@@ -4,12 +4,13 @@ import PropTypes from "prop-types";
 import { Link } from "gatsby";
 
 import imageStudents from "../images/priscilla-du-preez-XkKCui44iM0-unsplash.jpg";
+import Navbar from "../components/navbar";
 
-const Menu = ({ gradient, children, ...props }) => {
+const Menu = ({ background, children, ...props }) => {
   return (
     <div
       className="text-white p-4 mb-4"
-      style={{ background: gradient }}
+      style={{ background: background }}
       {...props}
     >
       {children}
@@ -18,11 +19,11 @@ const Menu = ({ gradient, children, ...props }) => {
 };
 
 Menu.propTypes = {
-  gradient: PropTypes.string,
+  background: PropTypes.string,
   children: PropTypes.arrayOf(PropTypes.object),
 };
 
-const Announcement = ({ title, desc, ...props }) => {
+const Announcement = ({ announcement, ...props }) => {
   return (
     <div {...props}>
       <div
@@ -33,21 +34,35 @@ const Announcement = ({ title, desc, ...props }) => {
           backgroundColor: "#1f2f71",
         }}
       ></div>
-      <h4>{title}</h4>
-      <p>{desc}</p>
+      <h4>{announcement.title}</h4>
+      <p>{announcement.desc}</p>
     </div>
   );
 };
 
 Announcement.propTypes = {
-  title: PropTypes.string,
-  desc: PropTypes.string,
+  announcement: PropTypes.object,
 };
 
 const IndexPage = () => {
-  let announcements = [
+  const announcements = [
     {
       id: 1,
+      title: "Brand new ui",
+      desc: "Test",
+    },
+    {
+      id: 2,
+      title: "Brand new ui",
+      desc: "Test",
+    },
+    {
+      id: 3,
+      title: "Brand new ui",
+      desc: "Test",
+    },
+    {
+      id: 4,
       title: "Brand new ui",
       desc: "Test",
     },
@@ -55,10 +70,11 @@ const IndexPage = () => {
 
   return (
     <Layout>
-      <div className="container bg-white my-4 h-100">
+      <Navbar />
+      <div className="container my-4">
         <div className="row">
-          <div className="col-lg-9">
-            <Menu gradient="linear-gradient(90deg, rgba(32,80,154,1) 0%, rgba(55,112,172,1) 100%)">
+          <div className="col-lg-10">
+            <Menu background="linear-gradient(90deg, rgba(32,80,154,1) 0%, rgba(55,112,172,1) 100%)">
               <div className="mb-3">
                 <h2 className="fw-bold">Looking for a study partner ?</h2>
                 <p>Maybe just someone to help you with your course ?</p>
@@ -67,7 +83,7 @@ const IndexPage = () => {
                 Register today
               </Link>
             </Menu>
-            <Menu gradient="linear-gradient(90deg, rgba(32,80,154,1) 0%, rgba(55,112,172,1) 100%)">
+            <Menu background="linear-gradient(90deg, rgba(32,80,154,1) 0%, rgba(55,112,172,1) 100%)">
               <div className="mb-3">
                 <h2 className="fw-bold">Already have account ?</h2>
                 <p>What are you waiting for login already</p>
@@ -78,8 +94,8 @@ const IndexPage = () => {
             </Menu>
           </div>
           <div
-            className="col-lg-3 order-first order-lg-last mb-4"
-            style={{ height: "600px" }}
+            className="col-lg-2 order-first order-lg-last mb-4"
+            style={{ height: "500px" }}
           >
             <img
               src={imageStudents}
@@ -93,9 +109,9 @@ const IndexPage = () => {
           <div className="row">
             {announcements.map((announcement) => (
               <Announcement
+                className="col-lg-3 mb-3"
                 key={announcement.id}
-                title={announcement.title}
-                desc={announcement.desc}
+                announcement={announcement}
               />
             ))}
           </div>

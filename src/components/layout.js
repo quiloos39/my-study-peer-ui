@@ -1,14 +1,8 @@
 import React from "react";
-import Navbar from "./navbar";
 import PropTypes from "prop-types";
 
 const Layout = ({ children, ...props }) => {
-  return (
-    <div {...props}>
-      <Navbar />
-      {children}
-    </div>
-  );
+  return <div {...props}>{children}</div>;
 };
 
 Layout.propTypes = {
