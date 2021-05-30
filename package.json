@@ -9,7 +9,7 @@
     "serve": "gatsby serve -H 0.0.0.0",
     "clean": "gatsby clean",
     "format": "prettier --write .",
-    "lint": "eslint --fix --cache src"
+    "lint": "eslint --fix --cache ."
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
