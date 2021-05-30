@@ -21,6 +21,7 @@ You need to have [Node.js](https://nodejs.org/en/) installed.
 ![](docs/homepage.png)
 
 ### About page
+
 ![](docs/about.png)
 
 ### Contact page
@@ -28,6 +29,7 @@ You need to have [Node.js](https://nodejs.org/en/) installed.
 ![](docs/contact.png)
 
 ### Posts page
+
 ![](docs/posts.png)
 
 ### Post page
@@ -45,5 +47,3 @@ You need to have [Node.js](https://nodejs.org/en/) installed.
 ### Register page
 
 ![](docs/register.png)
-
-
