@@ -8,18 +8,42 @@ You need to have [Node.js](https://nodejs.org/en/) installed.
 
 ## How to install
 
-`npm install`
+`npm install`.
 
 ## How to run
 
-`npm run develop`
+`npm run develop`.
 
-## Some images
+## Some images from website
 
 ### Home page
 
-![](images/homepage.png)
+![](docs/homepage.png)
+
+### About page
+![](docs/about.png)
 
 ### Contact page
 
-![](images/contact.png)
+![](docs/contact.png)
+
+### Posts page
+![](docs/posts.png)
+
+### Post page
+
+![](docs/post.png)
+
+### Profile page
+
+![](docs/profile.png)
+
+### Login page
+
+![](docs/login.png)
+
+### Register page
+
+![](docs/register.png)
+
+
