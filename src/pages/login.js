@@ -5,7 +5,7 @@ import Navbar from "../components/navbar";
 
 const LoginPage = () => {
   return (
-    <Layout className="vh-100" style={{ backgroundColor: "#0f3a65" }}>
+    <Layout style={{ backgroundColor: "#0f3a65" , height: '100vh'}}>
       <Navbar />
       <div className="container my-5 text-white">
         <div className="row">
