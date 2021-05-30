@@ -1,16 +1,14 @@
 name: Syntax check and format
 
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+on: [push, pull_request]
 
 jobs:
   check:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+      with:
+        ref: ${{ github.head_ref }}
     - uses: actions/setup-node@v2
     - run: npm ci
     - name: linter
