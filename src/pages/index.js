@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Layout from "../components/layout";
 import PropTypes from "prop-types";
 import { Link } from "gatsby";
+import axios from "axios";
 
 import imageStudents from "../images/priscilla-du-preez-XkKCui44iM0-unsplash.jpg";
 import Navbar from "../components/navbar";
+import "../mock/announcements";
 
 const Menu = ({ background, children, ...props }) => {
   return (
@@ -44,30 +46,43 @@ Announcement.propTypes = {
   announcement: PropTypes.object,
 };
 
-const IndexPage = () => {
-  const announcements = [
-    {
-      id: 1,
-      title: "Brand new ui",
-      desc: "Test",
-    },
-    {
-      id: 2,
-      title: "Brand new ui",
-      desc: "Test",
-    },
-    {
-      id: 3,
-      title: "Brand new ui",
-      desc: "Test",
-    },
-    {
-      id: 4,
-      title: "Brand new ui",
-      desc: "Test",
-    },
-  ];
+const Announcements = () => {
+  let [announcements, setAnnouncements] = React.useState([]);
 
+  useEffect(() => {
+    async function fetchAnnouncements() {
+      axios
+        .get("/api/announcements")
+        .then((res) => {
+          setAnnouncements(res.data);
+          console.log(announcements);
+        })
+        .catch((error) => {
+          setAnnouncements([]);
+          console.log(error);
+        });
+    }
+    fetchAnnouncements();
+  }, [announcements.length]);
+
+  return (
+    <div>
+      <h2>Announcement</h2>
+      <hr />
+      <div className="row">
+        {announcements.map((announcement) => (
+          <Announcement
+            className="col-lg-3 mb-3"
+            key={announcement.id}
+            announcement={announcement}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+const IndexPage = () => {
   return (
     <Layout>
       <Navbar />
@@ -103,19 +118,7 @@ const IndexPage = () => {
             />
           </div>
         </div>
-        <div>
-          <h2>News</h2>
-          <hr />
-          <div className="row">
-            {announcements.map((announcement) => (
-              <Announcement
-                className="col-lg-3 mb-3"
-                key={announcement.id}
-                announcement={announcement}
-              />
-            ))}
-          </div>
-        </div>
+        <Announcements />
       </div>
     </Layout>
   );
