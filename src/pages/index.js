@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../components/layout";
 import PropTypes from "prop-types";
 import { Link } from "gatsby";
@@ -47,7 +47,7 @@ Announcement.propTypes = {
 };
 
 const Announcements = () => {
-  let [announcements, setAnnouncements] = React.useState([]);
+  let [announcements, setAnnouncements] = useState([]);
 
   useEffect(() => {
     async function fetchAnnouncements() {
