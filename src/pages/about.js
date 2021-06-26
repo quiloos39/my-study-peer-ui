@@ -1,10 +1,10 @@
 import React from "react";
-import Layout from "../components/layout";
+import Layout from "../components/Layout/Layout";
 
 import headerImage from "../images/alex-kulikov-BrunIOLQMfQ-unsplash.jpg";
 import avatar1 from "../images/10371011.png";
 import avatar2 from "../images/75804467.png";
-import Navbar from "../components/navbar";
+import Navbar from "../components/Navbar/Navbar";
 
 const AboutPage = () => {
   return (

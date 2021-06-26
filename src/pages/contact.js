@@ -1,8 +1,8 @@
 import React from "react";
-import Layout from "../components/layout";
+import Layout from "../components/Layout/Layout";
 import headerImage from "../images/alex-kulikov-BrunIOLQMfQ-unsplash.jpg";
 import avatar from "../images/kisspng-rick-sanchez-morty-smith-pickle-rick-youtube-rick-rick-and-morty-5acb1188dd0a87.2585329315232577369054.png";
-import Navbar from "../components/navbar";
+import Navbar from "../components/Navbar/Navbar";
 
 const ContactPage = () => {
   return (

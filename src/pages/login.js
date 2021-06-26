@@ -4,9 +4,10 @@ import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
 import { Link } from "gatsby";
 
-import Layout from "../components/layout";
-import Navbar from "../components/navbar";
-import "../mock/user";
+import Layout from "../components/Layout/Layout";
+import Navbar from "../components/Navbar/Navbar";
+import isBrowser from "../helpers/is_browser";
+import sleep from "../helpers/sleep";
 
 const StatusMessage = ({ status }) => {
   return (
@@ -20,45 +21,54 @@ const StatusMessage = ({ status }) => {
 };
 
 StatusMessage.propTypes = {
-  status: PropTypes.objectOf({
-    message: PropTypes.string,
-    success: PropTypes.bool,
-  }),
+  status: PropTypes.object,
 };
 
 const LoginPage = () => {
   const { register, handleSubmit } = useForm();
   const [loginButtonDisabled, setLoginButtonDisabled] = useState(false);
-  const [profile, setProfile] = useState(null);
   const [status, setStatus] = useState(null);
 
   const onSubmit = (data) => {
-    console.log(data);
     setLoginButtonDisabled(true);
-    axios
-      .post("/api/user", {
-        email: data.email,
-        password: data.password,
-      })
-      .then((resp) => {
-        setStatus({
-          message: "Successfully logged in redirecting you to homepage.",
-          success: 1,
+
+    async function sendUserLoginData() {
+      axios
+        .post("/api/users/login", {
+          email: data.email,
+          password: data.password,
+        }, {
+          headers: {
+            "content-type": "application/json"
+          }
+        })
+        .then(async (resp) => {
+          setStatus({
+            message: "Successfully logged in redirecting you to homepage.",
+            success: true,
+          });
+          if (isBrowser) {
+            window.localStorage.setItem("profile", JSON.stringify(resp.data));
+          }
+          setLoginButtonDisabled(false);
+          await sleep(2000);
+          if (isBrowser) {
+            window.location.href = "/";
+          }
+        })
+        .catch((err) => {
+          if (err.response) {
+            setStatus({ message: "Invalid username or password.", success: false });
+          } else if (err.request) {
+            setStatus({ message: "Server is unavailable.", success: false });
+          } else {
+            setStatus({ message: "Something went wrong.", success: false });
+          }
+          setLoginButtonDisabled(false);
         });
-        setProfile(data);
-        setLoginButtonDisabled(false);
-      })
-      .catch((err) => {
-        if (err.response) {
-          setStatus({ message: "Invalid username or password.", success: 0 });
-        } else if (err.request) {
-          setStatus({ message: "Server is unavailable.", success: 0 });
-        } else {
-          setStatus({ message: "Something went wrong.", success: 0 });
-        }
-        console.error(err);
-        setLoginButtonDisabled(false);
-      });
+    }
+    sendUserLoginData();
+
   };
 
   return (

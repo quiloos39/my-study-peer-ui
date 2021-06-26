@@ -1,12 +1,6 @@
 @import "~bootstrap/scss/bootstrap.scss";
 
-#homepage-header img {
-  height: 300px;
-}
-
-@include media-breakpoint-up(xl) {
-  #homepage-header {
-    max-height: 600px;
-    height: 100%;
-  }
+.active {
+  text-decoration: underline;
+  text-underline-offset: 10px;
 }
