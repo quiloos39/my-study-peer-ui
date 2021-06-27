@@ -4,12 +4,16 @@ import Layout from "../components/Layout/Layout";
 import { Link } from "gatsby";
 import Navbar from "../components/Navbar/Navbar";
 import UniversityService from "../services/UniversityService";
+import UserService from "../services/UserService";
+import isBrowser from "../helpers/is_browser";
+import sleep from "../helpers/sleep";
 
 const RegisterPage = () => {
   const { register, handleSubmit } = useForm();
   const [universities, setUniversities] = useState({});
   const [selectedUniversity, setSelectedUniversity] = useState(null);
   const [registerButtonClicked, setRegisterButtonClicked] = useState(false);
+  const [statusMessage, setStatusMessage] = useState(null);
 
   useEffect(() => {
     UniversityService.getUniversityPrograms()
@@ -28,8 +32,31 @@ const RegisterPage = () => {
   }, []);
 
   const onSubmit = (data) => {
-    console.log(data);
-    // setRegisterButtonClicked(true);
+    setRegisterButtonClicked(true);
+
+    UserService.registerUser(
+      data.email,
+      data.name,
+      data.surname,
+      data.password,
+      data.city,
+      data.telephoneNumber,
+      data.class,
+      data.program,
+      data.university
+    )
+      .then((res) => {
+        setStatusMessage({message: "Successfully registered redirecting you to login page in 2 seconds.", success: true})
+        if (isBrowser) {
+          sleep(2000).then(() => {
+            window.location.href = "/login"
+          });
+        }
+      })
+      .catch((err) => {
+        setStatusMessage({message: "Something went wrong", status: false})
+        setRegisterButtonClicked(false);
+      });
   };
 
   return (
@@ -38,6 +65,11 @@ const RegisterPage = () => {
       <div className="container my-5">
         <h2>Registration</h2>
         <hr />
+        {statusMessage !== null && (
+          <div className={"alert " + (statusMessage.success ? "alert-success" : "alert-danger")} role="alert">
+            {statusMessage.message}
+          </div>
+        )}
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="row mb-3">
             <div className="col-lg-6">
@@ -61,7 +93,11 @@ const RegisterPage = () => {
           </div>
           <div className="mb-3">
             <label>City:</label>
-            <select className="form-select" {...register("city")} required={true}>
+            <select
+              className="form-select"
+              {...register("city")}
+              required={true}
+            >
               <option>Ankara</option>
             </select>
           </div>
@@ -71,13 +107,13 @@ const RegisterPage = () => {
             <select
               className="form-select"
               {...register("university")}
-              onChange={(event) => {(
+              onChange={(event) => {
                 universities[event.target.value] !== undefined &&
-                  setSelectedUniversity(event.target.value));
+                  setSelectedUniversity(event.target.value);
               }}
               required={true}
             >
-              <option>Other</option>
+              <option></option>
               {Object.keys(universities).map((university, index) => (
                 <option key={index}>{university}</option>
               ))}
@@ -93,20 +129,25 @@ const RegisterPage = () => {
                 {...register("program")}
                 required={true}
               >
-                {selectedUniversity !== null && universities[selectedUniversity].map((program, index) => (
-                  <option key={index}>{program}</option>
-                ))}
+                {selectedUniversity !== null &&
+                  universities[selectedUniversity].map((program, index) => (
+                    <option key={index} defaultValue={index === 0}>
+                      {program}
+                    </option>
+                  ))}
               </select>
             </div>
             <div className="col-lg-3">
               <label>Class / Year:</label>
-              <select className="form-select" {...register("class")} required={true}>
+              <select
+                className="form-select"
+                {...register("class")}
+                required={true}
+              >
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
                 <option>4</option>
-                <option>5</option>
-                <option>6</option>
               </select>
             </div>
           </div>
@@ -141,7 +182,11 @@ const RegisterPage = () => {
           <Link className="text-primary d-block mb-3" to="/login">
             Already have account ?
           </Link>
-          <button type="submit" className="btn btn-success" disabled={registerButtonClicked}>
+          <button
+            type="submit"
+            className="btn btn-success"
+            disabled={registerButtonClicked}
+          >
             Register
           </button>
         </form>

@@ -79,6 +79,7 @@ class PostService {
       course: course
     })
   }
+
 }
 
 export default PostService;

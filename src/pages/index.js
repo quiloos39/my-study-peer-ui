@@ -10,6 +10,7 @@ import imageStudents from "../images/eliott-reyna-kcT-7cirBEw-unsplash.jpg";
 import getLocalProfile from "../helpers/GetLocalProfile";
 import { faBan, faCheck } from "@fortawesome/free-solid-svg-icons";
 import PostService from "../services/PostService";
+import newsImage from "../images/news.jpeg";
 
 const Loading = () => {
   return (
@@ -53,8 +54,10 @@ const News = () => {
             <div key={enew.newsId} className="col-lg-3">
               <div
                 className="mb-3"
-                style={{ height: "200px", backgroundColor: "#000" }}
-              />
+                style={{ height: "200px", backgroundColor: "#3c73b6" }}
+              >
+                <img src={newsImage} className="w-100 h-100"/>
+              </div>
               <h4>{enew.title}</h4>
               <p>{enew.description}</p>
               <p style={{ color: "#686868" }}>Date: {enew.creationDate}</p>
